@@ -1,0 +1,13 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;ß
+}
+table tr {
+  border: 1px solid black;
+}
+table td,
+table th {
+  border: 1px solid black;
+  padding: 25px;
+}
+
