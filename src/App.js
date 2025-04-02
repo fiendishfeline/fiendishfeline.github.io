@@ -51,19 +51,77 @@ function Calendar() {
       <table>
         <thead>
           <tr>
-            <td>Sun</td>
-            <td>Mon</td>
-            <td>Tue</td>
-            <td>Wed</td>
-            <td>Thu</td>
-            <td>Fri</td>
-            <td>Sat</td>
+            <td
+              style={{
+                fontWeight: 600,
+                textDecoration: "underline",
+                backgroundColor: "pink",
+              }}
+            >
+              Sun
+            </td>
+            <td
+              style={{
+                fontWeight: 600,
+                textDecoration: "underline",
+                backgroundColor: "lightcoral",
+              }}
+            >
+              Mon
+            </td>
+            <td
+              style={{
+                fontWeight: 600,
+                textDecoration: "underline",
+                backgroundColor: "pink",
+              }}
+            >
+              Tue
+            </td>
+            <td
+              style={{
+                fontWeight: 600,
+                textDecoration: "underlin",
+                backgroundColor: "lightcoral",
+              }}
+            >
+              Wed
+            </td>
+            <td
+              style={{
+                fontWeight: 600,
+                textDecoration: "underline",
+                backgroundColor: "pink",
+              }}
+            >
+              Thu
+            </td>
+            <td
+              style={{
+                fontWeight: 600,
+                textDecoration: "underline",
+                backgroundColor: "lightcoral",
+              }}
+            >
+              Fri
+            </td>
+            <td
+              style={{
+                fontWeight: 600,
+                textDecoration: "underline",
+                backgroundColor: "pink",
+              }}
+            >
+              Sat
+            </td>
           </tr>
         </thead>
         {month.map((week) => (
           <tr>
             {week.map((day) => (
-              <td id={`${day}`}>{day}</td>
+              <td id={`${day}`} style={{ backgroundColor: "#a94064" }}>
+                {day}
+              </td>
             ))}
           </tr>
         ))}
