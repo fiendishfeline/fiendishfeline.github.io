@@ -7,12 +7,40 @@ export default function App() {
     <div className="App">
       <h1>Anika's Calendar</h1>
       <Calendar />
-      <Events />
+      {/* <Events /> */}
     </div>
   );
 }
 
 function Calendar() {
+  var [events, setEvents] = useState(Array(28).fill([]));
+  let [eventName, setEventName] = useState("");
+  let [eventDate, setEventDate] = useState(0);
+  let [showMessage, setShowMessage] = useState(false);
+  const addEvent = () => {
+    if (events[eventDate - 1].length === 3) {
+      setShowMessage(true);
+      return;
+    }
+    var newEvents = [...events];
+    newEvents[eventDate - 1] = [...events[eventDate - 1], eventName];
+    setEvents(newEvents);
+    setEventName("");
+    setEventDate(0);
+  };
+
+  const handleEventNameChange = (event) => {
+    setShowMessage(false);
+    const value = event.target.value;
+    setEventName(value);
+  };
+
+  const handleEventDateChange = (event) => {
+    setShowMessage(false);
+    const value = event.target.value;
+    setEventDate(value);
+  };
+
   let dateNum = 1;
   let firstDay = new Date("2023-02-10"),
     firstWeekDay;
@@ -48,84 +76,98 @@ function Calendar() {
 
   return (
     <div>
-      <table>
-        <thead>
-          <tr>
-            <td
-              style={{
-                fontWeight: 600,
-                textDecoration: "underline",
-                backgroundColor: "pink",
-              }}
-            >
-              Sun
-            </td>
-            <td
-              style={{
-                fontWeight: 600,
-                textDecoration: "underline",
-                backgroundColor: "lightcoral",
-              }}
-            >
-              Mon
-            </td>
-            <td
-              style={{
-                fontWeight: 600,
-                textDecoration: "underline",
-                backgroundColor: "pink",
-              }}
-            >
-              Tue
-            </td>
-            <td
-              style={{
-                fontWeight: 600,
-                textDecoration: "underlin",
-                backgroundColor: "lightcoral",
-              }}
-            >
-              Wed
-            </td>
-            <td
-              style={{
-                fontWeight: 600,
-                textDecoration: "underline",
-                backgroundColor: "pink",
-              }}
-            >
-              Thu
-            </td>
-            <td
-              style={{
-                fontWeight: 600,
-                textDecoration: "underline",
-                backgroundColor: "lightcoral",
-              }}
-            >
-              Fri
-            </td>
-            <td
-              style={{
-                fontWeight: 600,
-                textDecoration: "underline",
-                backgroundColor: "pink",
-              }}
-            >
-              Sat
-            </td>
-          </tr>
-        </thead>
-        {month.map((week) => (
-          <tr>
-            {week.map((day) => (
-              <td id={`${day}`} style={{ backgroundColor: "#a94064" }}>
-                {day}
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <td
+                style={{
+                  fontWeight: 600,
+                  textDecoration: "underline",
+                  backgroundColor: "pink",
+                }}
+              >
+                Sun
               </td>
-            ))}
-          </tr>
-        ))}
-      </table>
+              <td
+                style={{
+                  fontWeight: 600,
+                  textDecoration: "underline",
+                  backgroundColor: "lightcoral",
+                }}
+              >
+                Mon
+              </td>
+              <td
+                style={{
+                  fontWeight: 600,
+                  textDecoration: "underline",
+                  backgroundColor: "pink",
+                }}
+              >
+                Tue
+              </td>
+              <td
+                style={{
+                  fontWeight: 600,
+                  textDecoration: "underlin",
+                  backgroundColor: "lightcoral",
+                }}
+              >
+                Wed
+              </td>
+              <td
+                style={{
+                  fontWeight: 600,
+                  textDecoration: "underline",
+                  backgroundColor: "pink",
+                }}
+              >
+                Thu
+              </td>
+              <td
+                style={{
+                  fontWeight: 600,
+                  textDecoration: "underline",
+                  backgroundColor: "lightcoral",
+                }}
+              >
+                Fri
+              </td>
+              <td
+                style={{
+                  fontWeight: 600,
+                  textDecoration: "underline",
+                  backgroundColor: "pink",
+                }}
+              >
+                Sat
+              </td>
+            </tr>
+          </thead>
+          {month.map((week) => (
+            <tr>
+              {week.map((day) => (
+                <td id={`${day}`} style={{ backgroundColor: "#a94064" }}>
+                  {day}
+                  {events[day - 1] &&
+                    events[day - 1].map((event) => <div>{event}</div>)}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </table>
+      </div>
+      <div>
+        <div>
+          <div className="dialog">Event name </div>
+          <input onChange={handleEventNameChange} value={eventName} />
+          <div className="dialog">Event date(ex. dd)</div>
+          <input onChange={handleEventDateChange} value={eventDate} />
+        </div>
+        <Button onClick={addEvent}>Add Event</Button>
+      </div>
+      <div>{showMessage && "no more than 3 events on a day"}</div>
     </div>
   );
 }
